@@ -1,13 +1,13 @@
 var formValid = false;
 
 function validateField(field) {
-    field.style.border = "2px solid green";
+    field.style.border = "1px solid green";
     $('#' + field.id).popover('hide');
     formValid = true;
 }
 
 function invalidateField(field) {
-    field.style.border = "2px solid red";
+    field.style.border = "1px solid red";
     $('#'+field.id).popover('show');
     formValid = false;
 }
