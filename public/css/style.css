@@ -1,0 +1,30 @@
+@import 'bootstrap.css';
+
+.jumbotron {
+    text-align: center;
+    border-radius: 1rem;
+}
+
+form {
+    text-align: center;
+}
+
+header {
+    background-color: #123;
+    padding: 5%;
+}
+
+footer {
+    background-color: #123;
+    bottom: 0;
+    color: whitesmoke;
+    font-size: .8rem;
+    text-align: left;
+    padding: 3% 0 1% 2%;
+    position: relative;
+}
+
+input:focus {
+    font-weight: bolder;
+    background-color: lightblue;
+}
