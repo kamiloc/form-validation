@@ -1,18 +1,25 @@
 var formValid = false;
 
 function validateField(field) {
-    field.style.border = "1px solid green";
+    field.style.border = '1px solid green';
     $('#' + field.id).popover('hide');
     formValid = true;
 }
 
 function invalidateField(field) {
-    field.style.border = "1px solid red";
-    $('#'+field.id).popover('show');
+    field.style.border = '1px solid red';
+    $('#' + field.id).popover('show');
     formValid = false;
 }
 
+function resetField(field) {
+    field.style.border = '1px solid grey';
+    $('#' + field.id).popover('hide');
+}
+
 window.onload = function () {
+
+    document.getElementById('reset').addEventListener('click', reset);
 
     var gender = document.getElementById('gender'), password = document.getElementById('password'),
         confirmPassword = document.getElementById('confirmPassword');
@@ -81,32 +88,45 @@ window.onload = function () {
 
 function submitForm() {
 
-    var messageSelector = document.getElementById('message'),  inputs = Array.from(document.querySelectorAll('input')),
-    gender = document.getElementById('gender');
+    var messageSelector = document.getElementById('message'), inputs = Array.from(document.querySelectorAll('input')),
+        gender = document.getElementById('gender');
 
-    inputs.forEach(function(input){
-        if(input.value == ''){
+    inputs.forEach(function (input) {
+        if (input.value == '') {
             invalidateField(input);
             formValid = false;
         }
     });
 
-    if(gender.value == 'none') {
+    if (gender.value == 'none') {
         invalidateField(gender);
         formValid = false;
     }
 
-    if(!formValid) {
-        messageSelector.innerHTML = 
-        '<div class="alert alert-danger" role="alert">'+
-            '<strong>Somenthing is wrong:</strong> Check all fields are correct ?'+
-        '</div>';
+    if (!formValid) {
+        messageSelector.innerHTML =
+            '<div class="alert alert-danger" role="alert">' +
+            '<strong>Somenthing is wrong:</strong> Check all fields are correct ?' +
+            '</div>';
     } else {
-       messageSelector.innerHTML = 
-        '<div class="alert alert-success" role="alert">'+
-            '<strong>All good:</strong> All fields are correct'+
-        '</div>';
+        messageSelector.innerHTML =
+            '<div class="alert alert-success" role="alert">' +
+            '<strong>All good:</strong> All fields are correct' +
+            '</div>';
     }
 
 }
 
+function reset() {
+    var inputs = Array.from(document.querySelectorAll('input')), select = document.querySelector('select');
+
+    inputs.forEach(function (input) {
+        resetField(input);
+        input.value = '';
+    });
+
+    resetField(select);
+    select.value = 'none';
+    
+    formValid = false;
+}
