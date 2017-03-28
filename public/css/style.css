@@ -28,3 +28,16 @@ input:focus {
     font-weight: bolder;
     background-color: lightblue;
 }
+
+.container {
+    margin-top: 2rem;
+}
+
+.card {
+    margin: 1% 0 2% 0;
+}
+
+#new-a {
+    color: black;
+    text-decoration: none;
+}

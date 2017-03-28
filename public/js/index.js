@@ -1,5 +1,12 @@
 var formValid = false;
 
+var rawTemplate = document.getElementById('alertTemplate').innerHTML;
+var alertTemplate = Handlebars.compile(rawTemplate);
+
+var rawPostTemplate = document.getElementById('postCard').innerHTML;
+var postTemplate = Handlebars.compile(rawPostTemplate);
+
+
 function validateField(field) {
     field.style.border = '1px solid green';
     $('#' + field.id).popover('hide');
@@ -20,6 +27,7 @@ function resetField(field) {
 window.onload = function () {
 
     document.getElementById('reset').addEventListener('click', reset);
+    document.getElementById('submit').addEventListener('click', submitForm);
 
     var gender = document.getElementById('gender'), password = document.getElementById('password'),
         confirmPassword = document.getElementById('confirmPassword');
@@ -104,15 +112,10 @@ function submitForm() {
     }
 
     if (!formValid) {
-        messageSelector.innerHTML =
-            '<div class="alert alert-danger" role="alert">' +
-            '<strong>Somenthing is wrong:</strong> Check all fields are correct ?' +
-            '</div>';
+        messageSelector.innerHTML = alertTemplate({ type: 'danger', head: 'Somenthing is wrong', body: 'Check all fields are correct ?' });
     } else {
-        messageSelector.innerHTML =
-            '<div class="alert alert-success" role="alert">' +
-            '<strong>All good:</strong> All fields are correct' +
-            '</div>';
+        messageSelector.innerHTML = alertTemplate({ type: 'success', head: 'All good', body: 'All fields are correct' });
+        drawPosts();
     }
 
 }
@@ -127,6 +130,23 @@ function reset() {
 
     resetField(select);
     select.value = 'none';
-    
+
     formValid = false;
+}
+
+
+
+
+function drawPosts() {
+
+    $.ajax({
+        url: 'http://jsonplaceholder.typicode.com/posts/',
+        method: 'GET'
+    })
+        .then(function (data) {
+            document.getElementById('postsContainer').innerHTML = postTemplate({ items: data });
+        })
+        .catch(function (err) {
+            document.getElementById('postsContainer').innerHTML = alertTemplate({ type: 'danger', head: 'Post no loaded', body: err.statusText });
+        });
 }
