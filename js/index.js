@@ -140,7 +140,7 @@ function reset() {
 function drawPosts() {
 
     $.ajax({
-        url: 'http://jsonplaceholder.typicode.com/posts/',
+        url: 'https://jsonplaceholder.typicode.com/posts/',
         method: 'GET'
     })
         .then(function (data) {
