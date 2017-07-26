@@ -1,11 +1,13 @@
 {
   "name": "form-ex",
   "version": "1.0.0",
+  "homepage": "https://kamiloc.github.io/form-validation/",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "deploy": "gh-pages -d public"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "gh-pages": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1"
   }
